@@ -6,4 +6,4 @@ let c = gameCanvas.getContext("2d");
 gameCanvas.height = SCREENHEIGHT / 2;
 gameCanvas.width = SCREENWIDTH / 2;
 
-
+console.log("hej");
