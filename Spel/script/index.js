@@ -9,19 +9,21 @@ gameCanvas.style.position = "absolute";
 gameCanvas.style.left = (SCREENWIDTH - gameCanvas.width) / 2 + "px";
 gameCanvas.style.top = (SCREENHEIGHT - gameCanvas.height) / 2 + "px";
 
-// spelar upp musik
 window.onload = function () {
-  var musik = document.getElementById("musik");
-  musik.play();
+  let start = document.getElementById("start");
+  let musik = document.getElementById("musik");
+  let speletkörs = false;
 
-  let start = document.getElementById("start"); //funkar inte
-  let meny = document.getElementById("meny"); //funkar inte
   start.addEventListener("click", () => {
-    //funkar inte
-    meny.style.display = "none"; //funkar inte
-    animate();
+    if (!speletkörs) {
+      start.style.display = "none";
+      speletkörs = true;
+      musik.play();
+      animate();
+    }
   });
 };
+
 // Players egenskaper
 let playerX = gameCanvas.width / 2;
 let playerY = gameCanvas.height / 2;
@@ -114,4 +116,3 @@ function animate() {
     playerY += dy;
   }
 }
-animate();
