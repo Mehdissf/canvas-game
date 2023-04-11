@@ -121,11 +121,23 @@ class Player {
     }
   }
 }
+class Sprite {
+  constructor({ position }) {
+    this.position = position;
+    this.bild = new bild();
+    this.bild.src = "#";
+  }
+  rita() {
+    c.drawImage(this.bild, this.position.x, this.position.y);
+  }
+}
+const bakgrund1 = new Sprite({ position: { x: 0, y: 0 } });
 const player = new Player();
 
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  bakgrund1.rita();
   player.rita();
   player.updatera();
 }
