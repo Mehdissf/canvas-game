@@ -24,95 +24,108 @@ window.onload = function () {
   });
 };
 
-// Players egenskaper
-let playerX = gameCanvas.width / 2;
-let playerY = gameCanvas.height / 2;
-let playerWidth = 25;
-let playerHeight = 25;
-let dx = 8;
-let dy = 12;
-let gravitation = 0.4;
-let PlayerhastighetY = 0;
+class Player {
+  constructor() {
+    this.playerX = gameCanvas.width / 2;
+    this.playerY = gameCanvas.height / 2;
+    this.playerWidth = 25;
+    this.playerHeight = 25;
+    this.dx = 8;
+    this.dy = 12;
+    this.gravitation = 0.4;
+    this.PlayerhastighetY = 0;
 
-let directions = {
-  left: false,
-  right: false,
-  up: false,
-  down: false,
-};
-
-// ------------ Players rörelse ------------
-document.addEventListener("keydown", (e) => {
-  switch (e.key) {
-    case "a":
-      directions.left = true;
-      break;
-    case "d":
-      directions.right = true;
-      break;
-    case "w":
-      if (playerY === gameCanvas.height - playerHeight) {
-        PlayerhastighetY = -20;
+    this.directions = {
+      left: false,
+      right: false,
+      up: false,
+      down: false,
+    };
+  }
+  rita() {
+    c.fillRect(this.playerX, this.playerY, this.playerWidth, this.playerHeight);
+    c.fillStyle = "yellow";
+  }
+  updatera() {
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "a":
+          this.directions.left = true;
+          break;
+        case "d":
+          this.directions.right = true;
+          break;
+        case "w":
+          if (this.playerY === gameCanvas.height - this.playerHeight) {
+            this.PlayerhastighetY = -20;
+          }
+          this.directions.up = true;
+          break;
+        case "s":
+          this.directions.down = true;
+          break;
+        default:
+          break;
       }
-      directions.up = true;
-      break;
-    case "s":
-      directions.down = true;
-      break;
-    default:
-      break;
-  }
-});
+    });
 
-document.addEventListener("keyup", (e) => {
-  switch (e.key) {
-    case "a":
-      directions.left = false;
-      break;
-    case "d":
-      directions.right = false;
-      break;
-    case "w":
-      directions.up = false;
-      break;
-    case "s":
-      directions.down = false;
-      break;
-    default:
-      break;
+    document.addEventListener("keyup", (e) => {
+      switch (e.key) {
+        case "a":
+          this.directions.left = false;
+          break;
+        case "d":
+          this.directions.right = false;
+          break;
+        case "w":
+          this.directions.up = false;
+          break;
+        case "s":
+          this.directions.down = false;
+          break;
+        default:
+          break;
+      }
+    });
+    if (
+      this.directions.right &&
+      this.playerX < gameCanvas.width - this.playerWidth
+    ) {
+      if (this.playerX + this.dx > gameCanvas.width - this.playerWidth) {
+        this.playerX = gameCanvas.width - this.playerWidth;
+      } else {
+        this.playerX += this.dx;
+      }
+    }
+    if (this.directions.left && this.playerX > 0) {
+      if (this.playerX - this.dx < 0) {
+        this.playerX = 0;
+      } else {
+        this.playerX -= this.dx;
+      }
+    }
+
+    this.PlayerhastighetY += this.gravitation;
+    this.playerY += this.PlayerhastighetY;
+
+    if (this.playerY > gameCanvas.height - this.playerHeight) {
+      this.playerY = gameCanvas.height - this.playerHeight;
+      this.playerVelocityY = 0;
+    }
+
+    if (
+      this.directions.down &&
+      this.playerY < gameCanvas.height - this.playerHeight
+    ) {
+      this.playerY += this.dy;
+    }
   }
-});
+}
+const player = new Player();
 
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-  c.fillRect(playerX, playerY, playerWidth, playerHeight);
-  c.fillStyle = "yellow";
-
-  if (directions.right && playerX < gameCanvas.width - playerWidth) {
-    if (playerX + dx > gameCanvas.width - playerWidth) {
-      playerX = gameCanvas.width - playerWidth;
-    } else {
-      playerX += dx;
-    }
-  }
-  if (directions.left && playerX > 0) {
-    if (playerX - dx < 0) {
-      playerX = 0;
-    } else {
-      playerX -= dx;
-    }
-  }
-
-  PlayerhastighetY += gravitation;
-  playerY += PlayerhastighetY;
-
-  if (playerY > gameCanvas.height - playerHeight) {
-    playerY = gameCanvas.height - playerHeight;
-    playerVelocityY = 0;
-  }
-
-  if (directions.down && playerY < gameCanvas.height - playerHeight) {
-    playerY += dy;
-  }
+  player.rita();
+  player.updatera();
 }
