@@ -121,23 +121,34 @@ class Player {
     }
   }
 }
-class Sprite {
-  constructor({ position }) {
-    this.position = position;
-    this.bild = new bild();
-    this.bild.src = "#";
+const player = new Player();
+class Background {
+  constructor(src) {
+    this.image = new Image();
+    this.image.src = src;
+    this.x = 0;
+    this.y = 0;
+    this.width = gameCanvas.width;
+    this.height = gameCanvas.height;
   }
-  rita() {
-    c.drawImage(this.bild, this.position.x, this.position.y);
+
+  draw() {
+    c.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
-const bakgrund1 = new Sprite({ position: { x: 0, y: 0 } });
-const player = new Player();
+const background = new Background("game assets/bakgrund/layers/w.png");
+const background2 = new Background("game assets/bakgrund/layers/w1.png");
+const background3 = new Background("game assets/bakgrund/layers/w2.png");
+const background4 = new Background("game assets/bakgrund/layers/w3.png");
 
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-  bakgrund1.rita();
+
+  background.draw();
+  background2.draw();
+  background3.draw();
+  background4.draw();
   player.rita();
   player.updatera();
 }
