@@ -18,7 +18,6 @@ window.onload = function () {
   let i1 = new Image();
   i1.src =
     "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_1.png";
-
   let i2 = new Image();
   i2.src =
     "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_2.png";
@@ -57,11 +56,11 @@ class Player {
   constructor() {
     this.playerX = gameCanvas.width / 2;
     this.playerY = gameCanvas.height / 2;
-    this.playerWidth = 350;
-    this.playerHeight = 200;
+    this.playerWidth = 100;
+    this.playerHeight = 100;
     this.dx = 8;
-    this.dy = 12;
-    this.gravitation = 0.4;
+    this.dy = 5;
+    this.gravitation = 0.9;
     this.PlayerhastighetY = 0;
 
     this.directions = {
