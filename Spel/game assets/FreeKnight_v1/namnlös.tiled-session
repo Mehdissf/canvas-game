@@ -1,0 +1,58 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Colour2/HeroKnight_Idle_0.tsx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "Colour2/HeroKnight_Idle_0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "Colour2/_Attack.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Colour2/player.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Player.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "_Run.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pp.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
+        }
+    },
+    "frame.defaultDuration": 20,
+    "last.externalTilesetPath": "C:/Users/Elev/Desktop/canvas-game/Spel/game assets/FreeKnight_v1/Colour2",
+    "last.imagePath": "C:/Users/Elev/Desktop/canvas-game/Spel/game assets/Knight/Hero Knight/Sprites/HeroKnight/Idle",
+    "openFiles": [
+        "Colour2/HeroKnight_Idle_0.tsx"
+    ],
+    "project": "namnlös.tiled-project",
+    "recentFiles": [
+        "Colour2/HeroKnight_Idle_0.tsx",
+        "Colour2/_Attack.tsx",
+        "pp.tsx",
+        "_Run.tsx",
+        "Colour2/player.tsx",
+        "Player.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled-rutuppsättningsfiler (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 5,
+    "tileset.spacing": 5,
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    }
+}

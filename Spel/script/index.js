@@ -8,11 +8,40 @@ gameCanvas.width = SCREENWIDTH / 1.2;
 gameCanvas.style.position = "absolute";
 gameCanvas.style.left = (SCREENWIDTH - gameCanvas.width) / 2 + "px";
 gameCanvas.style.top = (SCREENHEIGHT - gameCanvas.height) / 2 + "px";
+let frame = 0;
 
 window.onload = function () {
   let start = document.getElementById("start");
   let musik = document.getElementById("musik");
   let speletkörs = false;
+
+  let i1 = new Image();
+  i1.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_1.png";
+
+  let i2 = new Image();
+  i2.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_2.png";
+  let i3 = new Image();
+  i3.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_3.png";
+  let i4 = new Image();
+  i4.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_4.png";
+  let i5 = new Image();
+  i5.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_5.png";
+  let i6 = new Image();
+  i6.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_6.png";
+  let i7 = new Image();
+  i7.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_7.png";
+  let i8 = new Image();
+  i8.src =
+    "game assets/hashashin/elementals_wind_hashashin_FREE_v1.1/PNG/idle/idle_8.png";
+
+  images = [i1, i2, i3, i4, i5, i6, i7, i8];
 
   start.addEventListener("click", () => {
     if (!speletkörs) {
@@ -28,8 +57,8 @@ class Player {
   constructor() {
     this.playerX = gameCanvas.width / 2;
     this.playerY = gameCanvas.height / 2;
-    this.playerWidth = 25;
-    this.playerHeight = 25;
+    this.playerWidth = 350;
+    this.playerHeight = 200;
     this.dx = 8;
     this.dy = 12;
     this.gravitation = 0.4;
@@ -42,9 +71,15 @@ class Player {
       down: false,
     };
   }
-  rita() {
-    c.fillRect(this.playerX, this.playerY, this.playerWidth, this.playerHeight);
-    c.fillStyle = "yellow";
+  rita(frame) {
+    c.drawImage(
+      images[frame],
+      this.playerX,
+      this.playerY,
+      this.playerWidth,
+      this.playerHeight
+    );
+    // c.fillRect(this.playerX, this.playerY, this.playerWidth, this.playerHeight);
   }
   updatera() {
     document.addEventListener("keydown", (e) => {
@@ -141,6 +176,13 @@ const background2 = new Background("game assets/bakgrund/layers/w1.png");
 const background3 = new Background("game assets/bakgrund/layers/w2.png");
 const background4 = new Background("game assets/bakgrund/layers/w3.png");
 
+setInterval(() => {
+  frame += 1;
+  if (frame > 6) {
+    frame = 0;
+  }
+}, 100);
+
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -149,6 +191,6 @@ function animate() {
   background2.draw();
   background3.draw();
   background4.draw();
-  player.rita();
+  player.rita(frame);
   player.updatera();
 }
