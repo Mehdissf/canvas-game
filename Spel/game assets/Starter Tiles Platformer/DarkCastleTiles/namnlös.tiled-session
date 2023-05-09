@@ -1,0 +1,36 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "DarkCastle_1_16x16.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "Alla filer (*)",
+    "fileStates": {
+        "DarkCastle_1_16x16.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 23
+        },
+        "hhhh.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        }
+    },
+    "last.imagePath": "C:/Users/Elev/Desktop/canvas-game/Spel/game assets/Starter Tiles Platformer/DarkCastleTiles",
+    "openFiles": [
+        "DarkCastle_1_16x16.tsx",
+        "DarkCastle_1_16x16.tsx"
+    ],
+    "project": "namnlös.tiled-project",
+    "recentFiles": [
+        "DarkCastle_1_16x16.tsx",
+        "hhhh.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
