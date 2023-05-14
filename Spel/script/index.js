@@ -106,7 +106,19 @@ const background = new Background("game assets/bakgrund/layers/w.png", 1);
 const background2 = new Background("game assets/bakgrund/layers/w1.png", 2);
 const background3 = new Background("game assets/bakgrund/layers/w2.png", 3);
 const background4 = new Background("game assets/bakgrund/layers/w3.png", 4);
-const background5 = new Background("game assets/bakgrund/layers/w3.png", 5);
+const background5 = new Background("game assets/bakgrund/layers/w3.png", 6);
+
+function XP(player) {
+  c.fillStyle = "white";
+  c.font = "20px Arial";
+  c.fillText("XP: " + player.xp, 10, 30);
+}
+
+function HP(player) {
+  c.fillStyle = "white";
+  c.font = "20px Arial";
+  c.fillText("HP: " + player.hp, 10, 60);
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -119,4 +131,6 @@ function animate() {
   platform.update();
   platform2.update();
   platform3.update();
+  XP(player);
+  HP(player);
 }

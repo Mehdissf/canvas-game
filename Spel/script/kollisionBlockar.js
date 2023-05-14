@@ -36,6 +36,7 @@ class Platform {
     ) {
       player.playerY = this.y - player.playerHeight;
       player.PlayerhastighetY = 0;
+      this.onGround = true;
     } else {
       this.onGround = false;
     }

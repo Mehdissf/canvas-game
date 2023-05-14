@@ -20,6 +20,24 @@ class Player {
       down: false,
     };
   }
+
+  //<<<<<<-----------------------XP-tidsintervall--------------------------->>>>
+  //<---------------------------------------------------------------------->
+  tidsintervall_startas(player) {
+    this.xpInterval = setInterval(() => {
+      this.xp += 1;
+      c.fillStyle = "white";
+      c.font = "20px Arial";
+      c.fillText("XP: " + player.xp, 10, 30);
+    }, 1000); // xp ökas med 1 vid varje sekund
+    return player;
+  }
+  tidsintervall_slutas() {
+    //Skall användas när spelaren dör
+    clearInterval(this.xpInterval);
+    this.xpInterval = null;
+  }
+
   rita(frame) {
     c.drawImage(
       runs[frame],
@@ -28,7 +46,6 @@ class Player {
       this.playerWidth,
       this.playerHeight
     );
-    // c.fillRect(this.playerX, this.playerY, this.playerWidth, this.playerHeight);
   }
   updatera() {
     document.addEventListener("keydown", (e) => {
@@ -47,7 +64,7 @@ class Player {
           }
           this.directions.up = true;
           // hoppar uppåt
-          // och sedan faller nedåt
+          // och sedan faller ned
           break;
         case "s":
           this.directions.down = true;
@@ -127,6 +144,12 @@ class Player {
         this.platform = null;
         this.onGround = false;
       }
+    }
+
+    // <<<------------------Splaren dör------------------->>>
+    if (this.hp <= 0) {
+      this.stopXPInterval();
+      console.log("Du dog");
     }
   }
 }
