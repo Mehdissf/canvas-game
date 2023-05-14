@@ -76,184 +76,6 @@ window.onload = function () {
   });
 };
 
-class Player {
-  constructor() {
-    this.playerX = gameCanvas.width / 2;
-    this.playerY = gameCanvas.height / 2;
-    this.playerWidth = 100;
-    this.playerHeight = 100;
-    this.dx = 8;
-    this.dy = 5;
-    this.gravitation = 0.7;
-    this.PlayerhastighetY = 0;
-    this.hp = 100;
-    this.xp = 0;
-    this.onGround = false;
-    this.platform = null; // den plattform spelaren står på
-
-    this.directions = {
-      left: false,
-      right: false,
-      up: false,
-      down: false,
-    };
-  }
-  rita(frame) {
-    c.drawImage(
-      runs[frame],
-      this.playerX,
-      this.playerY,
-      this.playerWidth,
-      this.playerHeight
-    );
-    // c.fillRect(this.playerX, this.playerY, this.playerWidth, this.playerHeight);
-  }
-  updatera() {
-    document.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "a":
-          this.directions.left = true;
-          // springer åt vänster
-          break;
-        case "d":
-          this.directions.right = true;
-          // springer åt höger
-          break;
-        case "w":
-          if (this.playerY === gameCanvas.height - this.playerHeight) {
-            this.PlayerhastighetY = -20;
-          }
-          this.directions.up = true;
-          // hoppar uppåt
-          // och sedan faller nedåt
-          break;
-        case "s":
-          this.directions.down = true;
-          break;
-        default:
-          break;
-      }
-    });
-
-    document.addEventListener("keyup", (e) => {
-      switch (e.key) {
-        case "a":
-          this.directions.left = false;
-          break;
-        case "d":
-          this.directions.right = false;
-          break;
-        case "w":
-          this.directions.up = false;
-          break;
-        case "s":
-          this.directions.down = false;
-          break;
-        default:
-          break;
-      }
-    });
-    // <<<------------gränser---------->>>>
-    if (
-      this.directions.right &&
-      this.playerX < gameCanvas.width - this.playerWidth
-    ) {
-      if (this.playerX + this.dx > gameCanvas.width - this.playerWidth) {
-        this.playerX = gameCanvas.width - this.playerWidth;
-      } else {
-        this.playerX += this.dx;
-      }
-    }
-    if (this.directions.left && this.playerX > 0) {
-      if (this.playerX - this.dx < 0) {
-        this.playerX = 0;
-      } else {
-        this.playerX -= this.dx;
-      }
-    }
-    if (this.directions.up && this.onGround) {
-      this.PlayerhastighetY = -20;
-      this.onGround = false;
-    }
-
-    this.PlayerhastighetY += this.gravitation;
-    this.playerY += this.PlayerhastighetY;
-
-    if (this.playerY > gameCanvas.height - this.playerHeight) {
-      this.playerY = gameCanvas.height - this.playerHeight;
-    }
-
-    if (
-      this.directions.down &&
-      this.playerY < gameCanvas.height - this.playerHeight
-    ) {
-      this.playerY += this.dy;
-    }
-    if (this.platform) {
-      if (
-        this.playerX + this.playerWidth > this.platform.x &&
-        this.playerX < this.platform.x + this.platform.width &&
-        this.playerY + this.playerHeight > this.platform.y &&
-        this.playerY < this.platform.y + this.platform.height
-      ) {
-        // Spelaren befinner sig på plattformen
-        this.playerY = this.platform.y - this.playerHeight;
-        this.PlayerhastighetY = 0;
-        this.onGround = true;
-      } else {
-        // Spelaren befinner sig inte på plattformen
-        this.platform = null;
-        this.onGround = false;
-      }
-    }
-  }
-}
-const player = new Player();
-
-class Platform {
-  constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.color = "green";
-  }
-
-  draw() {
-    c.beginPath();
-    c.fillStyle = this.color;
-    c.fillRect(this.x, this.y, this.width, this.height);
-    c.closePath();
-  }
-
-  update() {
-    this.x -= 2;
-    if (this.y > gameCanvas.height) {
-      this.y = -this.height;
-      this.y = Math.floor(Math.random() * (gameCanvas.height - this.height));
-    }
-    if (this.platform) {
-      this.platform.kollision(player);
-    }
-    this.draw();
-  }
-  kollision(player) {
-    if (
-      player.playerX < this.x + this.width &&
-      player.playerX + player.playerWidth > this.x &&
-      player.playerY + player.playerHeight > this.y &&
-      player.playerY + player.playerHeight < this.y + this.height
-    ) {
-      player.playerY = this.y - player.playerHeight;
-      player.PlayerhastighetY = 0;
-      this.onGround = true;
-    } else {
-      this.onGround = false;
-    }
-  }
-}
-const platform = new Platform(700, 500, 500, 20);
-
 class Background {
   constructor(src, fart) {
     this.image = new Image();
@@ -286,14 +108,6 @@ const background3 = new Background("game assets/bakgrund/layers/w2.png", 3);
 const background4 = new Background("game assets/bakgrund/layers/w3.png", 4);
 const background5 = new Background("game assets/bakgrund/layers/w3.png", 5);
 
-// -------------------Players frames----------------------
-setInterval(() => {
-  frame += 1;
-  if (frame > 7) {
-    frame = 0;
-  }
-}, 120);
-
 function animate() {
   requestAnimationFrame(animate);
   background.draw();
@@ -303,4 +117,6 @@ function animate() {
   player.rita(frame);
   player.updatera();
   platform.update();
+  platform2.update();
+  platform3.update();
 }
