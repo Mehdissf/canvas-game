@@ -22,9 +22,42 @@ canvas {
   font-size: 28px;
   color: black;
   padding: 10px 20px;
-  background-color: white;
+  background-color: "transparent";
 }
 #start:hover {
   background-color: rgb(0, 162, 255);
   transition: all 200ms;
+}
+#ramla_inte {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  font-size: 28px;
+  color: black;
+  padding: 10px 20px;
+}
+#menu {
+  position: absolute;
+  left: 40%;
+  top: 30px;
+
+  font-size: 28px;
+  color: black;
+}
+
+#Skärmen_som_visas_när_Player_dör {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+#Skärmen_som_visas_när_Player_dör.hidden {
+  display: none;
 }

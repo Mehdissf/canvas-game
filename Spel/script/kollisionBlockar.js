@@ -1,11 +1,13 @@
 class Platform {
-  constructor(x, y, avstånd) {
+  constructor(x, y, avstånd, svårighetsgrad) {
     this.x = x;
     this.y = y;
     this.width = 400;
     this.height = 20;
     this.color = "green";
     this.avstånd = avstånd;
+    this.svårighetsgrad = svårighetsgrad;
+    this.fart = this.fartnivå();
   }
 
   draw() {
@@ -16,11 +18,11 @@ class Platform {
   }
 
   update() {
-    this.x -= 3;
+    this.x -= this.fart;
     if (this.x + this.width < 0) {
       this.x = gameCanvas.width + this.avstånd;
       this.y = Math.floor(
-        Math.random() * (gameCanvas.height - this.height - 400) + 100
+        Math.random() * (gameCanvas.height - this.height - 100) + 200
       );
     }
     this.kollision(player);
@@ -29,19 +31,39 @@ class Platform {
 
   kollision(player) {
     if (
-      player.playerX > this.x &&
-      player.playerX + player.playerWidth < this.x + this.width &&
+      player.playerX + player.playerWidth > this.x &&
+      player.playerX < this.x + this.width &&
       player.playerY + player.playerHeight >= this.y &&
       player.playerY < this.y
     ) {
       player.playerY = this.y - player.playerHeight;
       player.PlayerhastighetY = 0;
-      this.onGround = true;
+      player.onPlatform = true;
+      player.platform = this;
     } else {
-      this.onGround = false;
+      player.onPlatform = false;
+      if (player.platform === this) {
+        player.platform = null;
+      }
+    }
+  }
+
+  fartnivå() {
+    switch (this.svårighetsgrad) {
+      case "lätt":
+        return 10;
+      case "medel":
+        return 25;
+      case "svår":
+        return 50;
+      default:
+        return "medel";
     }
   }
 }
-const platform = new Platform(700, 500, 100);
-const platform2 = new Platform(250, 100, 100);
-const platform3 = new Platform(400, 300, 100);
+
+const platform = new Platform(00, 500, 100, "medel");
+const platform2 = new Platform(60, 100, 100, "medel");
+const platform3 = new Platform(900, 300, 100, "medel");
+const platform4 = new Platform(100, 300, 100, "medel");
+const platform5 = new Platform(400, 300, 100, "medel");
