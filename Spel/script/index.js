@@ -104,7 +104,6 @@ class Player {
           break;
         case "w":
           this.directions.up = false;
-
           break;
         case "s":
           this.directions.down = false;
@@ -113,7 +112,8 @@ class Player {
           break;
       }
     });
-    // Om spelaren befinner sig på canvas då ska den dö---------->>>>
+
+    // Om spelaren befinner sig på canvas höjd då ska den dö---------->>>>
     if (this.playerY + this.playerHeight >= gameCanvas.height) {
       this.hp = 0;
       this.tidsintervall_slutas();
@@ -168,6 +168,7 @@ class Player {
         this.playerY = this.platform.y - this.playerHeight;
         this.PlayerhastighetY = 0;
         this.onGround = true;
+        this.dubbelthopp = true;
       } else {
         // Spelaren befinner sig inte på plattformen
         this.platform = null;
@@ -189,6 +190,7 @@ window.onload = function () {
   let start = document.getElementById("start");
   let ramla = document.getElementById("ramla_inte");
   let musik = document.getElementById("musik");
+  let svårighetsgradDisplay = document.getElementById("svårighetsgradvisare");
   // let svårighetsgrad = document.getElementsById("menu");
   let speletkörs = false;
 
@@ -252,6 +254,7 @@ window.onload = function () {
       }
       start.style.display = "none";
       ramla.style.display = "none";
+      svårighetsgradDisplay.style.display = "none";
 
       speletkörs = true;
       musik.play();
@@ -316,6 +319,7 @@ function skärmen_visas_efter_spelaren_dör(player) {
   fortsättButton.addEventListener("click", () => {
     gameOverScreen.classList.add("hidden");
     speletkörs = false;
+    location.reload(); //Magisk funktion för att återställa hela spelet
   });
 }
 

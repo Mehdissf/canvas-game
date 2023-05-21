@@ -1,6 +1,6 @@
 function spara() {
   let svårighetsgrad = document.getElementById("svårighetsgrad").value;
-  console.log("Svårighetsgraden är inställd på: " + svårighetsgrad);
+  let svårighetsgradvisare = document.getElementById("svårighetsgradvisare");
   switch (svårighetsgrad) {
     case "lätt":
       platform.svårighetsgrad = "lätt";
@@ -11,11 +11,18 @@ function spara() {
     case "svår":
       platform.svårighetsgrad = "svår";
       break;
+    case "extrem":
+      platform.svårighetsgrad = "extrem";
+      break;
     default:
       platform.svårighetsgrad = "medel";
   }
+  svårighetsgradvisare.textContent =
+    "Svårighetsgraden är inställd på: " + svårighetsgrad;
 
   platform.fart = platform.fartnivå();
   platform2.fart = platform.fartnivå();
   platform3.fart = platform.fartnivå();
+  platform4.fart = platform.fartnivå();
+  platform5.fart = platform.fartnivå();
 }

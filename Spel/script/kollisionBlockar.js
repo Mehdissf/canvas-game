@@ -56,14 +56,16 @@ class Platform {
         return 25;
       case "svår":
         return 50;
+      case "extrem":
+        return 90;
       default:
         return "medel";
     }
   }
 }
 
-const platform = new Platform(00, 500, 100, "medel");
-const platform2 = new Platform(60, 100, 100, "medel");
-const platform3 = new Platform(900, 300, 100, "medel");
-const platform4 = new Platform(100, 300, 100, "medel");
-const platform5 = new Platform(400, 300, 100, "medel");
+const platform = new Platform(400, 500, 100, "medel");
+const platform2 = new Platform(300, 100, 100, "medel");
+const platform3 = new Platform(1000, 100, 100, "medel");
+const platform4 = new Platform(100, 800, 100, "medel");
+const platform5 = new Platform(700, 300, 100, "medel");
