@@ -23,7 +23,7 @@ class Player {
     this.hp = 100;
     this.xp = 0;
     this.dubbelthopp = true;
-    this.onPlatform = false;
+    // ska fixa
     this.platform = null; // den plattform spelaren står på
 
     this.directions = {
@@ -71,15 +71,12 @@ class Player {
         case "w":
           if (
             this.playerY === gameCanvas.height - this.playerHeight ||
-            this.onPlatform ||
-            this.onGround
+            this.onPlatform
           ) {
             this.PlayerhastighetY = -20;
             this.dubbelthopp = true;
-            this.onGround = false; //funkar inte
-            this.onPlatform = false; //funkar inte
           } else if (this.dubbelthopp) {
-            this.PlayerhastighetY = -22;
+            this.PlayerhastighetY = -20;
             this.dubbelthopp = false;
           }
           this.directions.up = true;
@@ -138,9 +135,8 @@ class Player {
         this.playerX -= this.dx;
       }
     }
-    if ((this.directions.up && this.onGround) || this.onPlatform) {
-      this.PlayerhastighetY = -20;
-      this.onGround = false;
+    if (this.directions.up && this.onPlatform) {
+      this.PlayerhastighetY = -8;
     }
 
     this.PlayerhastighetY += this.gravitation;
@@ -167,12 +163,11 @@ class Player {
         // Spelaren befinner sig på plattformen
         this.playerY = this.platform.y - this.playerHeight;
         this.PlayerhastighetY = 0;
-        this.onGround = true;
+        this.platform = true;
         this.dubbelthopp = true;
       } else {
         // Spelaren befinner sig inte på plattformen
         this.platform = null;
-        this.onGround = false;
       }
     }
   }
@@ -263,6 +258,8 @@ window.onload = function () {
   });
 };
 
+
+
 class Background {
   constructor(src, fart) {
     this.image = new Image();
@@ -298,7 +295,7 @@ const background5 = new Background("game assets/bakgrund/layers/w3.png", 6);
 function XP(player) {
   c.fillStyle = "white";
   c.font = "20px Arial";
-  c.fillText("XP: " + player.xp, 10, 30);
+  c.fillText("Poäng: " + player.xp, 10, 30);
 }
 
 function HP(player) {
@@ -313,7 +310,7 @@ function skärmen_visas_efter_spelaren_dör(player) {
   gameOverScreen.classList.remove("hidden");
 
   let xpDisplay = document.getElementById("xpDisplay");
-  xpDisplay.textContent = "Tjänat XP: " + player.xp;
+  xpDisplay.textContent = "Tjänat poäng: " + player.xp;
 
   let fortsättButton = document.getElementById("fortsättknapp");
   fortsättButton.addEventListener("click", () => {
@@ -335,7 +332,6 @@ function animate() {
   platform2.update();
   platform3.update();
   platform4.update();
-  platform5.update();
   XP(player);
   HP(player);
   if (player.hp === 0) {

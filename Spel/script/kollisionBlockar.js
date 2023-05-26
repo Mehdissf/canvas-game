@@ -31,17 +31,17 @@ class Platform {
 
   kollision(player) {
     if (
+      // Kollar om spelaren befinner sig på plattformen
       player.playerX + player.playerWidth > this.x &&
       player.playerX < this.x + this.width &&
       player.playerY + player.playerHeight >= this.y &&
       player.playerY < this.y
     ) {
+      // Om den gör det då ska den inte ramla
       player.playerY = this.y - player.playerHeight;
       player.PlayerhastighetY = 0;
-      player.onPlatform = true;
       player.platform = this;
     } else {
-      player.onPlatform = false;
       if (player.platform === this) {
         player.platform = null;
       }
@@ -64,8 +64,7 @@ class Platform {
   }
 }
 
-const platform = new Platform(400, 500, 100, "medel");
-const platform2 = new Platform(300, 100, 100, "medel");
-const platform3 = new Platform(1000, 100, 100, "medel");
-const platform4 = new Platform(100, 800, 100, "medel");
-const platform5 = new Platform(700, 300, 100, "medel");
+const platform = new Platform(800, 500, 100, "medel");
+const platform2 = new Platform(600, 100, 100, "medel");
+const platform3 = new Platform(400, 400, 100, "medel");
+const platform4 = new Platform(200, 800, 100, "medel");

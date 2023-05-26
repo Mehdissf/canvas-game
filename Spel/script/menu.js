@@ -24,5 +24,4 @@ function spara() {
   platform2.fart = platform.fartnivå();
   platform3.fart = platform.fartnivå();
   platform4.fart = platform.fartnivå();
-  platform5.fart = platform.fartnivå();
 }
